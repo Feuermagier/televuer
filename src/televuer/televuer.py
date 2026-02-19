@@ -1,5 +1,9 @@
 from vuer import Vuer
+<<<<<<< HEAD
 from vuer.schemas import ImageBackground, Hands, MotionControllers, WebRTCVideoPlane, WebRTCStereoVideoPlane, Center, Text3D
+=======
+from vuer.schemas import ImageBackground, Hands, MotionControllers, WebRTCVideoPlane, WebRTCStereoVideoPlane, Billboard, Text
+>>>>>>> ca00bab (add text support)
 from multiprocessing import Value, Array, Process, shared_memory
 import numpy as np
 import asyncio
@@ -99,6 +103,8 @@ class TeleVuer:
         self.zmq = zmq
         self.webrtc = webrtc
         self.webrtc_url = webrtc_url
+
+        self.display_text = ""
 
         if self.display_mode == "immersive":
             if self.webrtc:
@@ -443,11 +449,16 @@ class TeleVuer:
                 to="bgChildren",
             )
             session.upsert(
-                Center(Text3D(
-                    "Hello World",
-                    font="https://threejs.org/examples/fonts/helvetiker_bold.typeface.json"
-                )),
-                to="video-quad",
+                Billboard(
+                    Text(
+                        self.display_text,
+                        key="billboard-text",
+                        color="black",
+                        fontSize=0.08,
+                    ),
+                    key="billboard",
+                ),
+                to="bgChildren",
             )
             await asyncio.sleep(1.0 / self.display_fps)
 
