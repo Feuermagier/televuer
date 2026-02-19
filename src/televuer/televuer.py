@@ -1,5 +1,5 @@
 from vuer import Vuer
-from vuer.schemas import ImageBackground, Hands, MotionControllers, WebRTCVideoPlane, WebRTCStereoVideoPlane
+from vuer.schemas import ImageBackground, Hands, MotionControllers, WebRTCVideoPlane, WebRTCStereoVideoPlane, Center, Text3D
 from multiprocessing import Value, Array, Process, shared_memory
 import numpy as np
 import asyncio
@@ -440,6 +440,13 @@ class TeleVuer:
                     height = 7,
                     layout="stereo-left-right"
                 ),
+                to="bgChildren",
+            )
+            session.upsert(
+                Center(Text3D(
+                    "Hello World",
+                    font="https://threejs.org/examples/fonts/helvetiker_bold.typeface.json"
+                )),
                 to="bgChildren",
             )
             await asyncio.sleep(1.0 / self.display_fps)
