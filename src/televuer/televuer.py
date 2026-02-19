@@ -221,6 +221,10 @@ class TeleVuer:
             except:
                 pass
 
+    def set_text(self, text: str):
+        with self.display_text.get_lock():
+            self.display_text.value = text
+
     async def on_cam_move(self, event, session, fps=60):
         try:
             with self.head_pose_shared.get_lock():
@@ -445,10 +449,13 @@ class TeleVuer:
                 ),
                 to="bgChildren",
             )
+
+            with self.display_text.get_lock():
+                text = self.display_text.value.decode()
             session.upsert(
                 Billboard(
                     Text(
-                        self.display_text.value.decode(),
+                        text,
                         key="billboard-text",
                         color="black",
                         fontSize=0.08,
