@@ -1,9 +1,5 @@
 from vuer import Vuer
-<<<<<<< HEAD
-from vuer.schemas import ImageBackground, Hands, MotionControllers, WebRTCVideoPlane, WebRTCStereoVideoPlane, Center, Text3D
-=======
 from vuer.schemas import ImageBackground, Hands, MotionControllers, WebRTCVideoPlane, WebRTCStereoVideoPlane, Billboard, Text
->>>>>>> ca00bab (add text support)
 from multiprocessing import Value, Array, Process, shared_memory
 import numpy as np
 import asyncio
