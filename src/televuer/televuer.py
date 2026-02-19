@@ -447,7 +447,7 @@ class TeleVuer:
                     "Hello World",
                     font="https://threejs.org/examples/fonts/helvetiker_bold.typeface.json"
                 )),
-                to="bgChildren",
+                to="video-quad",
             )
             await asyncio.sleep(1.0 / self.display_fps)
 
