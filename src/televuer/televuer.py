@@ -223,7 +223,7 @@ class TeleVuer:
 
     def set_text(self, text: str):
         with self.display_text.get_lock():
-            self.display_text.value = text
+            self.display_text.value = text.encode()
 
     async def on_cam_move(self, event, session, fps=60):
         try:
@@ -452,6 +452,7 @@ class TeleVuer:
 
             with self.display_text.get_lock():
                 text = self.display_text.value.decode()
+            print(text)
             session.upsert(
                 Billboard(
                     Text(
