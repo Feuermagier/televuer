@@ -8,6 +8,7 @@ import cv2
 import os
 from pathlib import Path
 from typing import Literal
+from ctypes import c_wchar_p
 
 
 class TeleVuer:
@@ -100,7 +101,7 @@ class TeleVuer:
         self.webrtc = webrtc
         self.webrtc_url = webrtc_url
 
-        self.display_text = ""
+        self.display_text = Value(c_wchar_p, "")
 
         if self.display_mode == "immersive":
             if self.webrtc:
@@ -447,7 +448,7 @@ class TeleVuer:
             session.upsert(
                 Billboard(
                     Text(
-                        self.display_text,
+                        self.display_text.value,
                         key="billboard-text",
                         color="black",
                         fontSize=0.08,
