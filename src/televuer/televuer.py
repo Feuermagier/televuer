@@ -101,7 +101,7 @@ class TeleVuer:
         self.webrtc = webrtc
         self.webrtc_url = webrtc_url
 
-        self.display_text = Value(ctypes.c_char_p, b"")
+        self.display_text = Array(ctypes.c_char, 256, lock=True)
 
         if self.display_mode == "immersive":
             if self.webrtc:
@@ -222,8 +222,9 @@ class TeleVuer:
                 pass
 
     def set_text(self, text: str):
+        text_enc = text.encode()[:255]
         with self.display_text.get_lock():
-            self.display_text.value = text.encode()
+            self.display_text.value = text_enc
 
     async def on_cam_move(self, event, session, fps=60):
         try:
@@ -451,8 +452,7 @@ class TeleVuer:
             )
 
             with self.display_text.get_lock():
-                text = self.display_text.value.decode()
-            print(text)
+                text = self.display_text.value.decode("utf-8")
             session.upsert(
                 Billboard(
                     Text(
