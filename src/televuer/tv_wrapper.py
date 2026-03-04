@@ -141,8 +141,11 @@ CONST_HAND_ROT = np.tile(np.eye(3)[None, :, :], (25, 1, 1))
 @dataclass
 class TeleData:
     head_pose: np.ndarray                  # (4,4) SE(3) pose of head matrix
+    openxr_head_pose: np.ndarray                  # (4,4) SE(3) pose of head matrix in openxr space
     left_wrist_pose: np.ndarray            # (4,4) SE(3) pose of left wrist of arm
+    openxr_left_wrist_pose: np.ndarray            # (4,4) SE(3) pose of left wrist of arm
     right_wrist_pose: np.ndarray           # (4,4) SE(3) pose of right wrist of arm
+    openxr_right_wrist_pose: np.ndarray           # (4,4) SE(3) pose of right wrist of arm
     # hand tracking
     # https://docs.vuer.ai/en/latest/examples/19_hand_tracking.html
     # https://immersive-web.github.io/webxr-hand-input/
@@ -365,8 +368,11 @@ class TeleVuerWrapper:
                 right_Brobot_arm_hand_rot = None
             return TeleData(
                 head_pose=Brobot_world_head,
+                openxr_head_pose=Bxr_world_head,
                 left_wrist_pose=left_IPunitree_Brobot_wrist_arm,
+                openxr_left_wrist_pose=left_IPxr_Bxr_world_arm,
                 right_wrist_pose=right_IPunitree_Brobot_wrist_arm,
+                openxr_right_wrist_pose=right_IPxr_Bxr_world_arm,
                 left_hand_pos=left_IPunitree_Brobot_arm_hand_pos,
                 right_hand_pos=right_IPunitree_Brobot_arm_hand_pos,
                 left_hand_rot=left_Brobot_arm_hand_rot,
@@ -411,8 +417,11 @@ class TeleVuerWrapper:
             # right_IPunitree_Brobot_waist_arm[1,3] +=0.02
             return TeleData(
                 head_pose=Brobot_world_head,
+                openxr_head_pose=Bxr_world_head,
                 left_wrist_pose=left_IPunitree_Brobot_wrist_arm,
+                openxr_left_wrist_pose=left_IPxr_Bxr_world_arm,
                 right_wrist_pose=right_IPunitree_Brobot_wrist_arm,
+                openxr_right_wrist_pose=right_IPxr_Bxr_world_arm,
                 left_ctrl_trigger=self.tvuer.left_ctrl_trigger,
                 left_ctrl_triggerValue=10.0 - self.tvuer.left_ctrl_triggerValue * 10,
                 left_ctrl_squeeze=self.tvuer.left_ctrl_squeeze,
