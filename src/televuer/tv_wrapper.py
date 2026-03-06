@@ -151,7 +151,9 @@ class TeleData:
     # https://immersive-web.github.io/webxr-hand-input/
     # HandsData, (25,16) SE3 => (25,3) pos + (25,3,3) rot
     left_hand_pos: np.ndarray = None       # (25,3) 3D positions of left hand joints
+    openxr_left_hand_pos: np.ndarray = None       # (25,3) 3D positions of left hand joints
     right_hand_pos: np.ndarray = None      # (25,3) 3D positions of right hand joints
+    openxr_right_hand_pos: np.ndarray = None      # (25,3) 3D positions of right hand joints
     left_hand_rot: np.ndarray  = None      # (25,3,3) rotation matrices of left hand joints
     right_hand_rot: np.ndarray = None      # (25,3,3) rotation matrices of right hand joints
     # HandState
@@ -374,7 +376,9 @@ class TeleVuerWrapper:
                 right_wrist_pose=right_IPunitree_Brobot_wrist_arm,
                 openxr_right_wrist_pose=right_IPxr_Bxr_world_arm,
                 left_hand_pos=left_IPunitree_Brobot_arm_hand_pos,
+                openxr_left_hand_pos=left_IPxr_Bxr_world_hand_pos,
                 right_hand_pos=right_IPunitree_Brobot_arm_hand_pos,
+                openxr_right_hand_pos=right_IPxr_Bxr_world_hand_pos,
                 left_hand_rot=left_Brobot_arm_hand_rot,
                 right_hand_rot=right_Brobot_arm_hand_rot,
                 left_hand_pinch=self.tvuer.left_hand_pinch,
