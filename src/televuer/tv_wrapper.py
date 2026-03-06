@@ -350,6 +350,8 @@ class TeleVuerWrapper:
             else:
                 left_IPunitree_Brobot_arm_hand_pos  = np.zeros((25, 3))
                 right_IPunitree_Brobot_arm_hand_pos = np.zeros((25, 3))
+                left_IPxr_Bxr_world_hand_pos = np.zeros((25, 3))
+                right_IPxr_Bxr_world_hand_pos = np.zeros((25, 3))
 
             # -----------------------------------hand rotation----------------------------------------
             if self.return_hand_rot_data:
